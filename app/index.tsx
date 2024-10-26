@@ -30,9 +30,8 @@ const LandingScreen: FC = () => {
     useEffect(() => {
         (async () => {
             const token = await getToken();
-            if (token) {
-                setIsAuth(true);
-            }
+                setIsAuth(token !== null);
+                // setIsAuth(false);
         })();
     }, [])
 

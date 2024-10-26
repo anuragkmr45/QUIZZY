@@ -4,7 +4,12 @@ export const sectionPlaceholder = {
     // color: Colors.text,
 };
 
-export const sectionOptions = Array.from({ length: 40 }, (_, index) => ({
+export type sectionOptionsType = {
+    label: string;
+    value: string;
+}
+
+export const sectionOptions: sectionOptionsType[] = Array.from({ length: 40 }, (_, index) => ({
     label: (index + 1).toString(),
     value: (index + 1).toString(),
 }));

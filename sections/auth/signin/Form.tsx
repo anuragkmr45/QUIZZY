@@ -12,8 +12,11 @@ import apiEndpoints from '@/services/api';
 
 const Form = ({ themeStyles }: { themeStyles: DefaultThemeType }) => {
 
-    const [registrationNumber, setRegNo] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        registrationNumber: '',
+        password: '',
+        androidId: 'fiorimwe4rdwsed430c'
+    });
     const [isShowPass, setIsShowPass] = useState(false);
 
     const { storeToken } = useAuthToken();
@@ -25,8 +28,7 @@ const Form = ({ themeStyles }: { themeStyles: DefaultThemeType }) => {
     const styles = SignInFormStyles(themeStyles);
     const handleFormSubmit = debounce(async () => {
         try {
-            const androidId = 'fiorimwe4rdwsed430c'
-            const res = await apiEndpoints.login({ registrationNumber, password, androidId });
+            const res = await apiEndpoints.login(formData);
 
             if (res.status === 200) {
                 await storeToken(res.token);
@@ -45,18 +47,19 @@ const Form = ({ themeStyles }: { themeStyles: DefaultThemeType }) => {
 
     return (
         <View>
-            <TextInputContainer
-                containerStyle={styles.inputFieldContainer}
-                placeholder='Registration No.'
-                placeholderTextColor={themeStyles["textColor_secondary"]}
-                inputFieldStyle={styles.inputFields}
-                cursorColor={themeStyles["textColor_primary"]}
-                keyboardType='phone-pad'
-                value={registrationNumber}
-                onChangeEvent={setRegNo}
-                autoComplete="off"
-                autoCapitalize="none"
-            />
+            <View style={styles.inputFieldContainer}>
+                <TextInput
+                    placeholder="Registration No."
+                    placeholderTextColor={themeStyles["textColor_secondary"]}
+                    style={styles.inputFields}
+                    keyboardType="phone-pad"
+                    value={formData.registrationNumber}
+                    onChangeText={(text) => { setFormData({ ...formData, registrationNumber: text }) }}
+                    cursorColor={themeStyles["textColor_primary"]}
+                    autoCapitalize="none"
+                    autoComplete="off"
+                />
+            </View>
             <View style={[styles.inputFieldContainer, { flexDirection: 'row', }]}>
                 <TextInput
                     placeholder='Password'
@@ -65,8 +68,8 @@ const Form = ({ themeStyles }: { themeStyles: DefaultThemeType }) => {
                     keyboardType='name-phone-pad'
                     autoCorrect={false}
                     secureTextEntry={isShowPass ? false : true}
-                    value={password}
-                    onChangeText={(text) => { setPassword(text) }}
+                    value={formData.password}
+                    onChangeText={(text) => { setFormData({ ...formData, password: text }) }}
                     cursorColor={themeStyles["textColor_primary"]}
                     autoCapitalize='none'
                 />
@@ -83,6 +86,7 @@ const Form = ({ themeStyles }: { themeStyles: DefaultThemeType }) => {
                     </TouchableOpacity>
                 </View>
             </View>
+
             <TouchableOpacity style={styles.authActionButton} onPress={handleFormSubmit}>
                 <Text style={styles.authActionButtonText}>Sign In</Text>
                 <Entypo name="login" size={24} color={themeStyles["backgroundColor_primary"]} />

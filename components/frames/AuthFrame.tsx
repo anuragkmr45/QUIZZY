@@ -24,8 +24,8 @@ const AuthFrame: FC<AuthFrameProps> = ({ children, img, pageTitle, bottomContain
     useEffect(() => {
 
         const handleCheckAuth = async () => {
-            const authToken = await getToken();
-            if (authToken !== '') {
+            const authToken: string | null = await getToken();
+            if (authToken !== null) {
                 router.replace('/(dashboard)/Home');
             }
         }
@@ -58,14 +58,14 @@ const AuthFrame: FC<AuthFrameProps> = ({ children, img, pageTitle, bottomContain
                     <View style={styles.screenFooter}>
                         {
                             pageTitle && pageTitle === 'Sign Up' ? (
-                                <View>
+                                <View style={{display: "flex", flexDirection: 'row' }}>
                                     <Text style={{ color: themeStyles["textColor_primary"] }}>Already having an account?</Text>
                                     <Link href='/(auth)/Signin' style={{ marginLeft: 8 }}>
                                         <Text style={{ color: themeStyles["backgroundColor_secondary"] }}>Sign In</Text>
                                     </Link>
                                 </View>
                             ) : (
-                                <View>
+                                <View style={{display: "flex", flexDirection: 'row' }}>
                                     <Text style={{ color: themeStyles["textColor_primary"] }}>Don't have an account?</Text>
                                     <Link href='/(auth)/Signup' style={{ marginLeft: 8 }}>
                                         <Text style={{ color: themeStyles["backgroundColor_secondary"] }}>Sign Up</Text>

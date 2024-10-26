@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
+import { DefaultThemeType } from "@/constants/themes";
 
-export const SignInStyles = (themeStyles) => StyleSheet.create({
+export const SignInStyles = (themeStyles: DefaultThemeType) => StyleSheet.create({
     bottomContainer: {
         marginTop: 10,
         width: '100%',
@@ -40,7 +41,7 @@ export const SignInStyles = (themeStyles) => StyleSheet.create({
     },
 })
 
-export const SignInFormStyles = (themeStyles) => StyleSheet.create({
+export const SignInFormStyles = (themeStyles: DefaultThemeType) => StyleSheet.create({
     inputFieldContainer: {
         marginVertical: 2,
     },

@@ -62,7 +62,7 @@ const apiEndpoints = {
             return error;
         }
     },
-    getProfile: async ({ authToken }: { authToken: string }) => {
+    getProfile: async ({ authToken }: { authToken: string | null }) => {
         try {
             api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
             const response = await api.get('/student-profile');

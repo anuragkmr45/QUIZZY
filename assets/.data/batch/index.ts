@@ -4,6 +4,4 @@ export const batchPlaceholder = {
     // color: Colors.text,
 };
 
-export const batchOptions = [
-    { label: "2025", value: "2025" },
-];
+export const batchOptions = ["2021"];
